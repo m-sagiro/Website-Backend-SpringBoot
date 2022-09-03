@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class CustomUserService {
     private final CustomUserRepo customUserRepo;
 
     @Autowired
-    public UserService(CustomUserRepo customUserRepo) {
+    public CustomUserService(CustomUserRepo customUserRepo) {
         this.customUserRepo = customUserRepo;
     }
 
