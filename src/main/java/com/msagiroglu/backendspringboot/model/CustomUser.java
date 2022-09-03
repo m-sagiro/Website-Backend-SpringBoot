@@ -1,17 +1,16 @@
-package com.msagiroglu.backendspringboot.Model;
-
-import org.springframework.stereotype.Repository;
+package com.msagiroglu.backendspringboot.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class User {
+public class CustomUser implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     private Long id;
-
     private String username;
     private String firstName;
     private String lastName;
@@ -19,11 +18,12 @@ public class User {
     private String email;
     private Date dateOfBirth;
 
-    protected User() {
+    public CustomUser() {
 
     }
 
-    public User(String username, String firstName, String lastName, int age, String email, Date dateOfBirth) {
+    public CustomUser(Long id, String username, String firstName, String lastName, int age, String email, Date dateOfBirth) {
+        this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -86,6 +86,18 @@ public class User {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String toString(){
+        return "User {" +
+                " Id = " + id + "," +
+                " Username = " + username + "," +
+                " First name = " + firstName + "," +
+                " Last name = " + lastName + "," +
+                " Age = " + age + "," +
+                " email = " + email + "," +
+                " Date of birth = " + dateOfBirth +
+                " }";
     }
 
 
