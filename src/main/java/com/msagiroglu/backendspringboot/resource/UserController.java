@@ -1,4 +1,4 @@
-package com.msagiroglu.backendspringboot;
+package com.msagiroglu.backendspringboot.resource;
 
 import com.msagiroglu.backendspringboot.model.User;
 import com.msagiroglu.backendspringboot.service.UserService;

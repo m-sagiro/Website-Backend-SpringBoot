@@ -1,0 +1,33 @@
+package com.msagiroglu.backendspringboot.security;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+//TODO Custom DSL
+public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
+
+    @Override
+    public void init(HttpSecurity http) throws Exception {
+        // any method that adds another configurer
+        // must be done in the init method
+        http.csrf().disable();
+    }
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        ApplicationContext context = http.getSharedObject(ApplicationContext.class);
+
+        // here we lookup from the ApplicationContext. You can also just create a new instance.
+//        MyFilter myFilter = context.getBean()
+//        myFilter.setFlag(flag);
+//        http.addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    public CustomDsl flag(boolean value) {
+        return this;
+    }
+
+    public static CustomDsl customDsl() {
+        return new CustomDsl();
+    }
+}
