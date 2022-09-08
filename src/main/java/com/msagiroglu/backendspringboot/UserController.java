@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUser() {
-        List<User> users = userService.getAllUser();
+        List<User> users = userService.getUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
@@ -31,7 +31,7 @@ public class UserController {
 
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
-        User newUser = userService.addUser(user);
+        User newUser = userService.saveUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
