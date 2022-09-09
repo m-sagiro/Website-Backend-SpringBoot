@@ -1,8 +1,14 @@
 package com.msagiroglu.backendspringboot.security;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+
+import static org.springframework.security.config.Customizer.withDefaults;
+import static org.springframework.security.config.http.SessionCreationPolicy.*;
+
 //TODO Custom DSL
 public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
 
@@ -11,11 +17,18 @@ public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
         // any method that adds another configurer
         // must be done in the init method
         http.csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(STATELESS);
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        ApplicationContext context = http.getSharedObject(ApplicationContext.class);
+//        ApplicationContext context = http.getSharedObject(ApplicationContext.class);
+//        AuthenticationManager authenticationManager =
+//                http.getSharedObject(AuthenticationManager.class);
+//        CustomAuthenticationFilter filter =
+//                new CustomAuthenticationFilter(authenticationManager, accessTokenExpiredInDays, refreshTokenExpiredInDays, jwtSecret);
+//        filter.setFilterProcessesUrl("/api/login");
+//        http.addFilter(filter);
 
         // here we lookup from the ApplicationContext. You can also just create a new instance.
 //        MyFilter myFilter = context.getBean()
