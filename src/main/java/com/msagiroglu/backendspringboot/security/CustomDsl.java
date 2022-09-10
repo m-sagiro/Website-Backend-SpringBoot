@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.config.http.SessionCreationPolicy.*;
 
@@ -18,6 +19,15 @@ public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
         // must be done in the init method
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
+        http
+                .authorizeRequests()
+                .antMatchers("/api/login/**", "/api/token/refresh/**").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers(GET, "/api/**").hasAnyAuthority("ROLE_ADMIN");
+//                .antMatchers("/user/all").hasRole("ADMIN");
+//                .antMatchers("/hello").permitAll();
+        http.authorizeRequests().anyRequest().authenticated();
+
     }
 
     @Override
