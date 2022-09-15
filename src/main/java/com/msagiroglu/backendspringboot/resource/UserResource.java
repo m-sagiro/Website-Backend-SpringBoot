@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import com.msagiroglu.backendspringboot.filter.CustomAuthorizationFilter;
 import com.msagiroglu.backendspringboot.utility.AuthenticationUtilities;
 import javax.management.relation.RoleNotFoundException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
