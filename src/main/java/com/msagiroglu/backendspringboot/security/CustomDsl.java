@@ -12,7 +12,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.*;
 
 //TODO Custom DSL
 public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
-
+    // TODO improve
     @Override
     public void init(HttpSecurity http) throws Exception {
         // any method that adds another configurer
@@ -22,7 +22,6 @@ public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
         http
                 .authorizeRequests()
                 .antMatchers("/api/login/**", "/api/token/refresh/**").permitAll()
-                .antMatchers("/login").permitAll()
                 .antMatchers(GET, "/api/**").hasAnyAuthority("ROLE_ADMIN");
 //                .antMatchers("/user/all").hasRole("ADMIN");
 //                .antMatchers("/hello").permitAll();
