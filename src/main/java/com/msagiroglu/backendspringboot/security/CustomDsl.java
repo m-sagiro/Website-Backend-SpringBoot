@@ -18,7 +18,6 @@ public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
         // any method that adds another configurer
         // must be done in the init method
         http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(STATELESS);
         http
                 .authorizeRequests()
                 .antMatchers("/api/login/**", "/api/token/refresh/**").permitAll()

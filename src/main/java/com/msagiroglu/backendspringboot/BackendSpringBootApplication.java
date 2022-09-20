@@ -1,7 +1,9 @@
 package com.msagiroglu.backendspringboot;
 
+import com.msagiroglu.backendspringboot.model.Blog;
 import com.msagiroglu.backendspringboot.model.Role;
 import com.msagiroglu.backendspringboot.model.User;
+import com.msagiroglu.backendspringboot.service.BlogService;
 import com.msagiroglu.backendspringboot.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Slf4j
 @SpringBootApplication
@@ -23,7 +26,7 @@ public class BackendSpringBootApplication {
     }
 
     @Bean
-    CommandLineRunner run(UserService userService){
+    CommandLineRunner run(UserService userService, BlogService blogService){
         return args -> {
             userService.saveRole(new Role(null, "ROLE_USER"));
             userService.saveRole(new Role(null, "ROLE_ADMIN"));
@@ -38,6 +41,11 @@ public class BackendSpringBootApplication {
             userService.addRoleToUser("user2", "ROLE_USER");
             userService.addRoleToUser("user3", "ROLE_ADMIN");
             userService.addRoleToUser("user4", "ROLE_ADMIN");
+
+            blogService.saveBlog(new Blog(null, "My first Blog entry", "My sub-titel for this entry", "Here i can write everything i 1want", new Date()));
+            blogService.saveBlog(new Blog(null, "My second Blog entry", "My sub-titel for this entry", "Here i can write everything i 2want", new Date()));
+            blogService.saveBlog(new Blog(null, "My third Blog entry", "My sub-titel for this entry", "Here i can write everything i 3want", new Date()));
+            blogService.saveBlog(new Blog(null, "My fourth Blog entry", "My sub-titel for this entry", "Here i can write everything i 4want", new Date()));
 
         };
     }
