@@ -1,10 +1,8 @@
 package com.msagiroglu.backendspringboot.resource;
 
 import com.msagiroglu.backendspringboot.model.Blog;
-import com.msagiroglu.backendspringboot.model.User;
 import com.msagiroglu.backendspringboot.service.BlogService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,6 +28,7 @@ public class BlogResource {
 
     @PostMapping("/blog/save")
     public ResponseEntity<Blog> saveBlog(@RequestBody Blog blog) {
+        System.out.println("New: " + blog);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/blog/save").toUriString());
         return ResponseEntity.created(uri).body(blogService.saveBlog(blog));
     }
@@ -40,8 +39,9 @@ public class BlogResource {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/blog/update/{id}")
+    @PutMapping("/blog/update")
     public ResponseEntity<Blog> updateBlog(@RequestBody Blog blog) {
+        System.out.println("Edit: " + blog);
         return ResponseEntity.ok().body(blogService.updateBlog(blog));
     }
 

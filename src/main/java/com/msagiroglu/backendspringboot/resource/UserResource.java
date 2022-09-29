@@ -10,6 +10,7 @@ import com.msagiroglu.backendspringboot.model.User;
 import com.msagiroglu.backendspringboot.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -29,6 +30,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@Slf4j
 public class UserResource {
     private final UserService userService;
 
@@ -57,6 +59,7 @@ public class UserResource {
 
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        log.info("User is trying to refresh its token");
         String authorizationHeader = request.getHeader(AUTHORIZATION);
         if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             try {
@@ -79,6 +82,7 @@ public class UserResource {
                 new ObjectMapper().writeValue(response.getOutputStream(), tokens);
             } catch (Exception exception) {
                 AuthenticationUtilities.handleAndSendError(response, exception);
+                log.error("User couldn't refresh its token");
             }
 
         } else {

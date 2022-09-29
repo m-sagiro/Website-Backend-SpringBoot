@@ -20,8 +20,8 @@ public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
         http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/api/login/**", "/api/token/refresh/**").permitAll()
-                .antMatchers(GET, "/api/**").hasAnyAuthority("ROLE_ADMIN");
+                .antMatchers("/api/login/**", "/api/token/refresh/**", "/api/blogs", "/api/blog/get/**", "/api/email/send").permitAll()
+                .antMatchers("/api/**").hasAnyAuthority("ROLE_ADMIN");
 //                .antMatchers("/user/all").hasRole("ADMIN");
 //                .antMatchers("/hello").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
