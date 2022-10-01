@@ -34,9 +34,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)));
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
+        CustomAuthorizationFilter customAuthorizationFilter = new CustomAuthorizationFilter();
         http
-                .apply(new CustomDsl())
-                .flag(true);
+                .apply(new CustomDsl());
         http
                 .addFilterAt(
                         customAuthenticationFilter,
@@ -44,7 +44,7 @@ public class SecurityConfig {
                 );
         http
                 .addFilterBefore(
-                        new CustomAuthorizationFilter(),
+                        customAuthorizationFilter,
                         UsernamePasswordAuthenticationFilter.class
                 );
         http.formLogin().disable();

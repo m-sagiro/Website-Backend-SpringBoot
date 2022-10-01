@@ -16,7 +16,7 @@ public class EmailServiceImpl {
         message.setFrom("m.sagiro042@gmail.com");
         message.setTo("m.sagiro042@gmail.com");
         message.setSubject(name);
-        message.setText(text + " Email: " + email);
+        message.setText(text + "\n\nEmail: " + email);
         emailSender.send(message);
     }
 }

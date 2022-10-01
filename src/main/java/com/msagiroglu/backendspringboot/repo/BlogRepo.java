@@ -8,5 +8,4 @@ import java.util.Optional;
 public interface BlogRepo extends JpaRepository<Blog, Long> {
     Optional<Blog> findBlogById(Long id);
     void deleteBlogById(Long id);
-    Optional<Blog> findByTitle(String title);
 }
