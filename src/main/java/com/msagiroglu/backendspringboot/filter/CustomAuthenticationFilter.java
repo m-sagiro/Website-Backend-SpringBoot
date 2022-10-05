@@ -46,7 +46,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException {
         User user = (User) authentication.getPrincipal();
-        Algorithm algorithm = Algorithm.HMAC256(System.getenv("encSec").getBytes());
+        Algorithm algorithm = Algorithm.HMAC256(System.getenv("ENC_KEY").getBytes());
         String access_token = AuthenticationUtilities.createAccessToken(request, algorithm, user);
         String refresh_token = JWT.create()
                 .withSubject(user.getUsername())

@@ -15,7 +15,14 @@ public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
                         "/api/token/refresh/**",
                         "/api/blogs",
                         "/api/blog/get/**",
-                        "/api/email/send").permitAll()
+                        "/api/email/send",
+                        "/**.eot", "/**.woff2",
+                        "/**.ttf", "/**.woff",
+                        "/**.html", "/**.js", "/**.css",
+                        "/**.map", "/assets/**",
+                        "/", "/error",
+                        "/entry", "/home", "/about", "/blog/**", "/contact", "/logout"
+                ).permitAll()
                 .antMatchers("/api/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
 
@@ -25,4 +32,9 @@ public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
     public void configure(HttpSecurity http) throws Exception {
 
     }
+
+
+
+
+
 }
