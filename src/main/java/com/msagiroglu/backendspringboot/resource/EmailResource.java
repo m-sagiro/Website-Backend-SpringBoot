@@ -27,6 +27,8 @@ public class EmailResource {
                 emailService.sendSimpleMessage(mailObject.getName(), mailObject.getText(), mailObject.getEmail());
                 return ResponseEntity.ok().body(mailObject);
             } catch (Exception e) {
+                mailObject.setName(e.toString());
+                mailObject.setEmail(e.getMessage());
                 return ResponseEntity.badRequest().body(mailObject);
             }
         } else {
