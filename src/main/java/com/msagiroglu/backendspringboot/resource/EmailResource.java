@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,12 +27,12 @@ public class EmailResource {
             try {
                 emailService.sendSimpleMessage(mailObject.getName(), mailObject.getText(), mailObject.getEmail());
                 return ResponseEntity.ok().body(mailObject);
-            } catch (Exception e) {
-                mailObject.setName(e.toString());
-                mailObject.setEmail(e.getMessage());
+            } catch (MailException e) {
+                log.error(e.getMessage());
                 return ResponseEntity.badRequest().body(mailObject);
             }
         } else {
+            log.error("Captcha invalid");
             return ResponseEntity.badRequest().body(mailObject);
         }
     }

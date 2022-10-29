@@ -7,11 +7,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class CaptchaValidator {
+
     @Autowired
     private RestTemplate restTemplate;
 
     public boolean isValidCaptcha(String captcha) {
-
         String url = "https://www.google.com/recaptcha/api/siteverify";
         String params = "?secret=" + System.getenv("captchaSecret") + "&response=" + captcha;
         String completeUrl = url + params;
